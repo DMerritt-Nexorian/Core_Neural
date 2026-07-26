@@ -1,4 +1,6 @@
 # MASTER TECHNICAL SPECIFICATION: CORE_NEURAL
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21605054.svg)](https://doi.org/10.5281/zenodo.21605054)
+
 ## Ultra-Flexible Subdermal Brain-Computer Interface Neural Decoders
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
