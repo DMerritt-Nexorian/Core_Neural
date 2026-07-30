@@ -1,5 +1,7 @@
-# MASTER TECHNICAL SPECIFICATION: CORE_NEURAL
+[![Validator CI](https://github.com/DMerritt-Nexorian/Core_Neural/actions/workflows/validator.yml/badge.svg)](https://github.com/DMerritt-Nexorian/Core_Neural/actions/workflows/validator.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21605054.svg)](https://doi.org/10.5281/zenodo.21605054)
+
+# MASTER TECHNICAL SPECIFICATION: CORE_NEURAL
 
 ## Ultra-Flexible Subdermal Brain-Computer Interface Neural Decoders
 
@@ -25,33 +27,51 @@ This repository contains the CORE_NEURAL Master Technical Specification alongsid
 ## What's changed (README update)
 
 - A lightweight runtime validator script has been added at `src/decoding_validator.py` to programmatically check key operational boundaries described in the spec (latency, packet loss, tissue impedance).
-- This README has been updated to document how to use the validator, its public API, and quickstart instructions.
+- A small unit test and CI workflow have been added to exercise the validator.
+- An examples script demonstrates passing vs failing conditions.
+- A Dockerfile is included for reproducible execution.
 
 ---
 
-## Quickstart: run the validator
+## Quickstart: run the validator locally
 
 Requirements:
-- Python 3.8+ (recommended)
+- Docker (recommended for reproducible runs) or Python 3.8+ (recommended)
 
-From the repository root you can run the validator directly:
+Run with Python directly:
 
 ```bash
 python src/decoding_validator.py
 ```
 
-This will execute a simple self-test that asserts the example values meet the specification limits; on success it prints:
+From the repository root this prints a success message when the self-test passes:
 
 [SUCCESS] CORE_NEURAL validation checks passed.
 
-Alternatively, import the validator functions into your own tests or CI checks:
+Run the examples script to see passing and failing conditions:
 
-```python
-from src.decoding_validator import verify_neural_decoding_latency, verify_tissue_impedance
+```bash
+python examples/validator_demo.py
+```
 
-# Example checks
-print(verify_neural_decoding_latency(2.1, 0.0001))  # True
-print(verify_tissue_impedance(35.0))                 # True
+Run the unit tests (pytest):
+
+```bash
+pip install pytest
+pytest -q
+```
+
+Run with Docker (reproducible):
+
+```bash
+# build
+docker build -t core_neural:latest .
+
+# run the validator self-test inside the container
+docker run --rm core_neural:latest
+
+# or run the example script
+docker run --rm core_neural:latest python examples/validator_demo.py
 ```
 
 ---
@@ -74,7 +94,14 @@ These functions are intentionally small and dependency-free so they can be embed
 - README.md — This document (updated)
 - LICENSE — CC0 1.0 Universal public domain dedication
 - src/ — Reference implementations and validation utilities (validator currently)
-- tests/ — Placeholder for test suites
+- tests/ — Unit tests (pytest)
+- examples/ — Example scripts demonstrating validator behavior
+
+---
+
+## CI: GitHub Actions
+
+This repository includes a GitHub Actions workflow that runs on push and pull request events. The workflow installs Python, runs pytest, and executes the validator script to ensure the repository's runtime checks remain passing.
 
 ---
 
