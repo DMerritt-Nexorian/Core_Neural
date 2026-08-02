@@ -1,0 +1,33 @@
+name: Static Analysis & Compliance Gate
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  static-analysis:
+    name: Cppcheck & Clang-Tidy Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Analysis Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck clang-tidy
+
+      - name: Run Cppcheck (MISRA-C:2012 enforcement)
+        run: |
+          cppcheck --enable=all --std=c11 --error-exitcode=1 \
+            --suppress=missingIncludeSystem \
+            -I core_neural_c/include \
+            core_neural_c/src/*.c core_neural_c/tests/*.c
+
+      - name: Run Clang-Tidy (Strict Embedded Guidelines)
+        run: |
+          clang-tidy core_neural_c/src/*.c core_neural_c/tests/*.c \
+            -header-filter=core_neural_c/include/.* \
+            -- -Icore_neural_c/include -std=c17
