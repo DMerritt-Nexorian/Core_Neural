@@ -115,8 +115,8 @@ int main(void) {
         /* Print decay history every 10 steps */
         if ((step % 10U) == 0U) {
             const double theoretical_bound = (double)initial_perturbation_norm * pow(1.0 - (double)(config.stability_c * config.dt), (double)step);
-            printf("[STABILITY] Step %2u: Norm = %10.6f (Theoretical Bound <= %10.6f)\n",
-                   step, (double)current_norm, theoretical_bound);
+            printf("[STABILITY] Step %2lu: Norm = %10.6f (Theoretical Bound <= %10.6f)\n",
+                   (unsigned long)step, (double)current_norm, theoretical_bound);
         }
     }
 

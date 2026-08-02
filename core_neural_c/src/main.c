@@ -13,8 +13,11 @@
 #include "platform_hal.h"
 #include <stdio.h>
 #include <stddef.h>
-#include <time.h>
 #include <math.h>
+
+#if defined(__linux__) || defined(__unix__) || defined(__posix__) || defined(__APPLE__)
+#include <time.h>
+#endif
 
 /* --- STATIC MEMORY POOL ALLOCATIONS (Zero-allocation runtime) --- */
 static DecoderState global_state;
@@ -25,6 +28,7 @@ static float32_t raw_lfp_buffer[OBS_DIM];
 /* --- HARDWARE ABSTRACTION LAYER (HAL) IMPLEMENTATION --- */
 
 uint64_t platform_get_time_us(void) {
+#if defined(__linux__) || defined(__unix__) || defined(__posix__) || defined(__APPLE__)
     struct timespec ts;
     uint64_t us = 0U;
 
@@ -32,6 +36,12 @@ uint64_t platform_get_time_us(void) {
         us = ((uint64_t)ts.tv_sec * 1000000ULL) + ((uint64_t)ts.tv_nsec / 1000ULL);
     }
     return us;
+#else
+    /* Bare-metal mock cycle-accurate counter fallback (avoids POSIX clock dependencies) */
+    static uint64_t simulated_time_us = 0U;
+    simulated_time_us += 1000U; /* Simulates 1ms per execution step */
+    return simulated_time_us;
+#endif
 }
 
 bool platform_read_lfp(float32_t *const lfp_dest, uint32_t size) {
@@ -196,9 +206,9 @@ int main(void) {
         }
     }
 
-    printf("[SUMMARY] Execution cycles completed: %u / %u\n", successful_steps, sim_steps);
-    printf("[SUMMARY] Safety boundary violations: %u\n", boundary_violations);
-    printf("[SUMMARY] Contractive stability contract violations: %u\n", stability_violations);
+    printf("[SUMMARY] Execution cycles completed: %lu / %lu\n", (unsigned long)successful_steps, (unsigned long)sim_steps);
+    printf("[SUMMARY] Safety boundary violations: %lu\n", (unsigned long)boundary_violations);
+    printf("[SUMMARY] Contractive stability contract violations: %lu\n", (unsigned long)stability_violations);
     printf("====================================================================\n");
     printf("[SUCCESS] CORE_NEURAL validation checks passed.\n");
     printf("====================================================================\n");

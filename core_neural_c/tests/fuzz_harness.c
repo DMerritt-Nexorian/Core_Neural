@@ -30,7 +30,7 @@ int main(void) {
     uint32_t iterations = 10000U;
     uint32_t ok_count = 0U;
 
-    printf("[FUZZ] Running %u iterations of boundary condition checks...\n", iterations);
+    printf("[FUZZ] Running %lu iterations of boundary condition checks...\n", (unsigned long)iterations);
 
     for (uint32_t iter = 0U; iter < iterations; ++iter) {
         /* 1. Stress Tensor Vector L2 Norm with random vectors, including NaNs, Infs, and zero dimensions */
@@ -97,7 +97,7 @@ int main(void) {
     }
 
     printf("[FUZZ] Successfully ran all stress iterations without any memory faults!\n");
-    printf("[FUZZ] Robust contract verification counts: %u\n", ok_count);
+    printf("[FUZZ] Robust contract verification counts: %lu\n", (unsigned long)ok_count);
     printf("====================================================================\n");
 
     return 0;

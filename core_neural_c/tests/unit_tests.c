@@ -208,7 +208,7 @@ int main(void) {
     RUN_TEST(test_safety_boundary_compliance);
 
     printf("--------------------------------------------------------------------\n");
-    printf("TEST RESULTS: PASSED: %u | FAILED: %u\n", passed, failed);
+    printf("TEST RESULTS: PASSED: %lu | FAILED: %lu\n", (unsigned long)passed, (unsigned long)failed);
     printf("====================================================================\n");
 
     return (failed > 0U) ? 1 : 0;
