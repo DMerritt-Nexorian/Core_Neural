@@ -1,8 +1,8 @@
 # CORE_NEURAL (C Migration): High-Assurance Real-Time Decoder
 
-Welcome to the **production-grade C migration** of the `CORE_NEURAL` subdermal brain-computer interface (BCI) decoding system.
+Welcome to the **production-grade C codebase** of the `CORE_NEURAL` subdermal brain-computer interface (BCI) decoding system.
 
-By eliminating legacy MathWorks MATLAB and Python scripts from the core runtime pipeline, this repository provides a bare-metal ready, **MISRA-C:2012 / ISO C18 compliant** implementation designed for high-density, safety-critical neuro-prosthetics. It delivers **Technology Readiness Level 9 (TRL-9)** operational readiness with deterministic constant-time execution, zero runtime memory allocation, and rigid safety-invariant checks.
+Designed for high-density, safety-critical neuro-prosthetics, this repository provides a bare-metal ready, **MISRA-C:2012 / ISO C18 compliant** implementation of the core runtime pipeline. It delivers **Technology Readiness Level 9 (TRL-9)** operational readiness with deterministic constant-time execution, zero runtime memory allocation, and rigid safety-invariant checks.
 
 ---
 
@@ -107,7 +107,7 @@ make formal_verification
 
 ## 5. CI/CD INTEGRATION WORKFLOW PATTERNS
 
-We mirror the continuous integration standard of `bcind_nexus_core` via GitHub workflows located under `workflows/`:
+We enforce high-assurance continuous integration standards via GitHub workflows located under `.github/workflows/`:
 1. **`static_analysis.yml`**: Triggers `cppcheck` with MISRA rulesets and `clang-tidy` to prevent warning leaks.
 2. **`formal_verification.yml`**: Invokes CBMC to mathematically prove the absence of pointer dereferences, array bounds, and overflow errors.
 3. **`cross_compile.yml`**: Confirms build compatibility across target bare-metal architectures using cross-compilers (`arm-none-eabi-gcc` and `riscv64-unknown-elf-gcc`).
