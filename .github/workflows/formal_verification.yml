@@ -21,14 +21,14 @@ jobs:
 
       - name: Mathematical Buffer & Overflow Proofs
         run: |
-          cbmc core_neural_c/src/tensor_ops.c \
-               core_neural_c/src/safety_invariants.c \
-               core_neural_c/src/core_neural_kernels.c \
-               core_neural_c/tests/unit_tests.c \
+          cbmc src/tensor_ops.c \
+               src/safety_invariants.c \
+               src/core_neural_kernels.c \
+               tests/unit_tests.c \
                --pointer-check \
                --bounds-check \
                --div-by-zero-check \
                --signed-overflow-check \
                --unsigned-overflow-check \
-               -I core_neural_c/include \
+               -I include \
                --unwind 10

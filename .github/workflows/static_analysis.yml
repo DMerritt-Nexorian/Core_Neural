@@ -23,11 +23,11 @@ jobs:
         run: |
           cppcheck --enable=all --std=c11 --error-exitcode=1 \
             --suppress=missingIncludeSystem \
-            -I core_neural_c/include \
-            core_neural_c/src/*.c core_neural_c/tests/*.c
+            -I include \
+            src/*.c tests/*.c
 
       - name: Run Clang-Tidy (Strict Embedded Guidelines)
         run: |
-          clang-tidy core_neural_c/src/*.c core_neural_c/tests/*.c \
-            -header-filter=core_neural_c/include/.* \
-            -- -Icore_neural_c/include -std=c17
+          clang-tidy src/*.c tests/*.c \
+            -header-filter=include/.* \
+            -- -Iinclude -std=c17

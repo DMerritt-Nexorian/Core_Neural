@@ -22,18 +22,18 @@ jobs:
       - name: Compile for ARM Cortex-M (Bare-Metal)
         run: |
           arm-none-eabi-gcc -c -O3 -std=c18 -Wall -Wextra -Werror -Wpedantic \
-            -I core_neural_c/include \
+            -I include \
             -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 \
-            core_neural_c/src/tensor_ops.c \
-            core_neural_c/src/safety_invariants.c \
-            core_neural_c/src/core_neural_kernels.c \
-            core_neural_c/src/main.c
+            src/tensor_ops.c \
+            src/safety_invariants.c \
+            src/core_neural_kernels.c \
+            src/main.c
 
       - name: Compile for RISC-V (Bare-Metal)
         run: |
           riscv64-linux-gnu-gcc -c -O3 -std=c18 -Wall -Wextra -Werror -Wpedantic \
-            -I core_neural_c/include \
-            core_neural_c/src/tensor_ops.c \
-            core_neural_c/src/safety_invariants.c \
-            core_neural_c/src/core_neural_kernels.c \
-            core_neural_c/src/main.c
+            -I include \
+            src/tensor_ops.c \
+            src/safety_invariants.c \
+            src/core_neural_kernels.c \
+            src/main.c
