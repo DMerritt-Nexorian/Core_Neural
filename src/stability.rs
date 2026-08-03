@@ -28,16 +28,18 @@ pub fn verify_contractive_stability(
     }
 
     let len = x1.len();
-    let mut diff_t = vec![0.0f32; len];
-    let mut diff_t_next = vec![0.0f32; len];
+    let mut sum_diff_t = 0.0;
+    let mut sum_diff_t_next = 0.0;
 
     for i in 0..len {
-        diff_t[i] = x1[i] - x2[i];
-        diff_t_next[i] = next_x1[i] - next_x2[i];
+        let d_t = x1[i] - x2[i];
+        let d_t_next = next_x1[i] - next_x2[i];
+        sum_diff_t += d_t * d_t;
+        sum_diff_t_next += d_t_next * d_t_next;
     }
 
-    let norm_t = l2_norm(&diff_t);
-    let norm_t_next = l2_norm(&diff_t_next);
+    let norm_t = sum_diff_t.sqrt();
+    let norm_t_next = sum_diff_t_next.sqrt();
 
     let decay_factor = 1.0 - (c * dt);
     let limit = decay_factor * norm_t;
