@@ -1,10 +1,1 @@
-# Ignore build binaries and object files
-obj/
-core_neural_decoder
-fuzz_harness
-invariant_validation
-unit_tests
-tests/fuzz_harness
-tests/invariant_validation
-tests/unit_tests
-*.o
+/target

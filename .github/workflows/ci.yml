@@ -1,0 +1,32 @@
+name: Core Neural Rust CI/CD
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  rust-ci:
+    name: Build, Format, Lint, Test & Bench
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Stable Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Cargo Format Check
+        run: cargo fmt --all -- --check
+
+      - name: Cargo Clippy Linting (Strict Zero-Warning Gate)
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Cargo Test Suite
+        run: cargo test --all
+
+      - name: Cargo Benchmark Verification
+        run: cargo bench
