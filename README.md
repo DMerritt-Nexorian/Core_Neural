@@ -1,5 +1,6 @@
 # Core_Neural: High-Performance, Memory-Safe Neural Compute Engine
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21605054.svg)](https://doi.org/10.5281/zenodo.21605054)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 [![Rust CI/CD](https://github.com/DMerritt-Nexorian/Core_Neural/actions/workflows/ci.yml/badge.svg)](https://github.com/DMerritt-Nexorian/Core_Neural/actions/workflows/ci.yml)
 
@@ -90,4 +91,8 @@ Enforce extreme compliance by executing our unified test, style, and performance
 * **Micro-Benchmarking Execution:**
   ```bash
   cargo bench
+  ```
+* **High-Assurance Compliance Audit:**
+  ```bash
+  ./tests/periodic_audit.sh
   ```
