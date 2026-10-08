@@ -1,0 +1,20 @@
+[package]
+name = "core_neural"
+version = "1.0.0"
+edition = "2024"
+authors = ["Dennis W. Merritt <NexorianLabs@icloud.com>"]
+description = "High-Performance Neural Compute & Signal Decoding Library"
+readme = "README.md"
+license = "CC0-1.0"
+
+[dependencies]
+
+[[bench]]
+name = "neural_bench"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
