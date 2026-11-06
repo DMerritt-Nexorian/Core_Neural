@@ -73,14 +73,14 @@ verify: $(INVR_BIN)
 
 static_analysis:
 	@echo "[STATIC ANALYSIS] Running cppcheck..."
-	cppcheck --enable=all --std=c11 --error-exitcode=1 --suppress=missingIncludeSystem -I include $(SRC_DIR)/*.c $(TEST_DIR)/*.c
+	cppcheck --enable=all --std=c11 --inline-suppr --error-exitcode=1 --suppress=missingIncludeSystem -I include $(SRC_DIR)/*.c $(TEST_DIR)/*.c
 
 formal_verification:
 	@echo "[FORMAL VERIFICATION] Running CBMC..."
 	cbmc $(SRCS) $(TEST_DIR)/unit_tests.c \
 		--pointer-check --bounds-check --div-by-zero-check \
 		--signed-overflow-check --unsigned-overflow-check \
-		-I include --unwind 33
+		-I include --unwind 65
 
 clean:
 	rm -rf $(OBJ_DIR) $(MAIN_BIN) $(UNIT_BIN) $(FUZZ_BIN) $(INVR_BIN)
