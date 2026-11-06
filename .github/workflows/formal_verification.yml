@@ -35,4 +35,4 @@ jobs:
                --signed-overflow-check \
                --unsigned-overflow-check \
                -I core_neural_c/include \
-               --unwind 10
+               --unwind 32
