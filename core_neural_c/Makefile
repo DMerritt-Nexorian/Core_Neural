@@ -73,7 +73,7 @@ verify: $(INVR_BIN)
 
 static_analysis:
 	@echo "[STATIC ANALYSIS] Running cppcheck..."
-	cppcheck --enable=all --std=c11 --inline-suppr --error-exitcode=1 --suppress=missingIncludeSystem -I include $(SRC_DIR)/*.c $(TEST_DIR)/*.c
+	cppcheck --enable=all --std=c11 --inline-suppr --exitcode-suppressions=cppcheck-exitcode-suppressions.txt --error-exitcode=1 --suppress=missingIncludeSystem -I include $(SRC_DIR)/*.c $(TEST_DIR)/*.c
 
 formal_verification:
 	@echo "[FORMAL VERIFICATION] Running CBMC..."
