@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Cppcheck (MISRA-C:2012 enforcement)
         run: |
-          cppcheck --enable=all --std=c11 --error-exitcode=1 \
+          cppcheck --enable=all --std=c11 --inline-suppr --exitcode-suppressions=core_neural_c/cppcheck-exitcode-suppressions.txt --error-exitcode=1 \
             --suppress=missingIncludeSystem \
             -I core_neural_c/include \
             core_neural_c/src/*.c core_neural_c/tests/*.c

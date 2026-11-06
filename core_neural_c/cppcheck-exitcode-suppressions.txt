@@ -1,0 +1,3 @@
+# Keep Cppcheck informational diagnostics visible without failing the compliance gate.
+normalCheckLevelMaxBranches
+checkersReport
