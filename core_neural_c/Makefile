@@ -80,7 +80,7 @@ formal_verification:
 	cbmc $(SRCS) $(TEST_DIR)/unit_tests.c \
 		--pointer-check --bounds-check --div-by-zero-check \
 		--signed-overflow-check --unsigned-overflow-check \
-		-I include --unwind 32
+		-I include --unwind 33
 
 clean:
 	rm -rf $(OBJ_DIR) $(MAIN_BIN) $(UNIT_BIN) $(FUZZ_BIN) $(INVR_BIN)
