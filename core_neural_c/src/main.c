@@ -27,6 +27,8 @@ static float32_t raw_lfp_buffer[OBS_DIM];
 
 /* --- HARDWARE ABSTRACTION LAYER (HAL) IMPLEMENTATION --- */
 
+/* HAL symbol intentionally retains external linkage per platform_hal.h. */
+/* cppcheck-suppress staticFunction */
 uint64_t platform_get_time_us(void) {
 #if defined(__linux__) || defined(__unix__) || defined(__posix__) || defined(__APPLE__)
     struct timespec ts;
@@ -44,6 +46,8 @@ uint64_t platform_get_time_us(void) {
 #endif
 }
 
+/* HAL symbol intentionally retains external linkage per platform_hal.h. */
+/* cppcheck-suppress staticFunction */
 bool platform_read_lfp(float32_t *const lfp_dest, uint32_t size) {
     bool success = false;
     if ((lfp_dest != NULL) && (size == OBS_DIM)) {
@@ -58,6 +62,8 @@ bool platform_read_lfp(float32_t *const lfp_dest, uint32_t size) {
     return success;
 }
 
+/* HAL symbol intentionally retains external linkage per platform_hal.h. */
+/* cppcheck-suppress staticFunction */
 bool platform_send_telemetry(const DecoderState *const state, const SystemHealthStatus *const health) {
     bool success = false;
     if ((state != NULL) && (health != NULL)) {
@@ -68,6 +74,8 @@ bool platform_send_telemetry(const DecoderState *const state, const SystemHealth
     return success;
 }
 
+/* HAL symbol intentionally retains external linkage per platform_hal.h. */
+/* cppcheck-suppress staticFunction */
 void platform_get_system_health(SystemHealthStatus *const health) {
     if (health != NULL) {
         health->current_latency_ms = 1.15f;    /* 1.15 ms latency (below 5.0 ms threshold) */
